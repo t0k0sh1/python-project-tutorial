@@ -9,7 +9,7 @@ def add(a, b):
         The sum of a and b
 
     Raises:
-        ValueError: If a or b is not a numeric type or is None
+        ValueError: If a or b is None, boolean, or not an int/float type
     """
     if a is None or b is None:
         raise ValueError("Arguments cannot be None")
