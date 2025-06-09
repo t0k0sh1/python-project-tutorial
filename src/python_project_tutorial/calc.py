@@ -11,4 +11,13 @@ def add(a, b):
     Raises:
         ValueError: If a or b is not a numeric type or is None
     """
-    pass
+    if a is None or b is None:
+        raise ValueError("Arguments cannot be None")
+    
+    if isinstance(a, bool) or isinstance(b, bool):
+        raise ValueError("Arguments cannot be boolean")
+    
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        raise ValueError("Arguments must be numeric types (int or float)")
+    
+    return a + b
