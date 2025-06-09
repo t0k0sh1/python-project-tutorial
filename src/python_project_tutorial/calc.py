@@ -65,4 +65,5 @@ def mul(a, b):
     Raises:
         ValueError: If a or b is None, boolean, or not an int/float type
     """
-    pass
+    _validate_numeric_operands(a, b)
+    return a * b
