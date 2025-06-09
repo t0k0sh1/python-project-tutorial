@@ -25,7 +25,11 @@ class TestAdd:
     ])
     def test_add_正常系(self, a, b, expected):
         """正常系: 数値型の引数を与えた場合、正しい加算結果を返すこと"""
-        assert add(a, b) == expected
+        # 浮動小数点数の場合はpytest.approxを使用
+        if isinstance(expected, float):
+            assert add(a, b) == pytest.approx(expected)
+        else:
+            assert add(a, b) == expected
 
     @pytest.mark.parametrize("a, b", [
         # 異常系: 数値型以外の値
@@ -71,7 +75,11 @@ class TestSubtract:
     ])
     def test_subtract_正常系(self, a, b, expected):
         """正常系: 数値型の引数を与えた場合、正しい減算結果を返すこと"""
-        assert subtract(a, b) == expected
+        # 浮動小数点数の場合はpytest.approxを使用
+        if isinstance(expected, float):
+            assert subtract(a, b) == pytest.approx(expected)
+        else:
+            assert subtract(a, b) == expected
 
     @pytest.mark.parametrize("a, b", [
         # 異常系: 数値型以外の値
