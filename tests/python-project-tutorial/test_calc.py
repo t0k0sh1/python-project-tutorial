@@ -1,5 +1,5 @@
 import pytest
-from python_project_tutorial.calc import add, subtract
+from python_project_tutorial.calc import add, subtract, mul
 
 
 class TestAdd:
@@ -100,3 +100,58 @@ class TestSubtract:
         """異常系: 数値型以外またはNoneの引数を与えた場合、ValueErrorを発生させること"""
         with pytest.raises(ValueError):
             subtract(a, b)
+
+
+class TestMul:
+    """mul関数のテストクラス"""
+
+    @pytest.mark.parametrize("a, b, expected", [
+        # 正常系: 代表値テスト
+        (2, 3, 6),
+        (0, 5, 0),
+        (5, 0, 0),
+        (-2, 3, -6),
+        (2, -3, -6),
+        (-2, -3, 6),
+        (1.5, 2.0, 3.0),
+        (-1.5, 2.0, -3.0),
+        
+        # 境界値テスト
+        (0, 0, 0),
+        (1, 1, 1),
+        (-1, 1, -1),
+        (-1, -1, 1),
+        
+        # 限界値テスト（大きな値）
+        (1e10, 2, 2e10),
+        (-1e10, 2, -2e10),
+        (1e-10, 2e10, 2.0),
+        (2.5, 4.0, 10.0),
+    ])
+    def test_mul_正常系(self, a, b, expected):
+        """正常系: 数値型の引数を与えた場合、正しい乗算結果を返すこと"""
+        # 浮動小数点数の場合はpytest.approxを使用
+        if isinstance(expected, float):
+            assert mul(a, b) == pytest.approx(expected)
+        else:
+            assert mul(a, b) == expected
+
+    @pytest.mark.parametrize("a, b", [
+        # 異常系: 数値型以外の値
+        ("2", 3),
+        (2, "3"),
+        ("2", "3"),
+        (None, 1),
+        (1, None),
+        (None, None),
+        ([], 1),
+        (1, []),
+        ({}, 1),
+        (1, {}),
+        (True, 1),  # boolは数値型として扱われる可能性があるが、仕様に従いValueError
+        (1, False),
+    ])
+    def test_mul_異常系_型エラー(self, a, b):
+        """異常系: 数値型以外またはNoneの引数を与えた場合、ValueErrorを発生させること"""
+        with pytest.raises(ValueError):
+            mul(a, b)

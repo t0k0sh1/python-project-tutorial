@@ -50,3 +50,20 @@ def subtract(a, b):
     """
     _validate_numeric_operands(a, b)
     return a - b
+
+
+def mul(a, b):
+    """Multiply two numbers.
+
+    Args:
+        a: A numeric value
+        b: A numeric value
+
+    Returns:
+        The product of a and b (a * b)
+
+    Raises:
+        ValueError: If a or b is None, boolean, or not an int/float type
+    """
+    _validate_numeric_operands(a, b)
+    return a * b
