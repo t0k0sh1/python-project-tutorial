@@ -21,3 +21,19 @@ def add(a, b):
         raise ValueError("Arguments must be numeric types (int or float)")
     
     return a + b
+
+
+def subtract(a, b):
+    """Subtract two numbers.
+
+    Args:
+        a: A numeric value
+        b: A numeric value
+
+    Returns:
+        The difference of a and b (a - b)
+
+    Raises:
+        ValueError: If a or b is None, boolean, or not an int/float type
+    """
+    pass
